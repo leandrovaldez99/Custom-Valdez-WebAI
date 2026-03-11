@@ -26,20 +26,20 @@ const Hero = () => (
         <div className="flex items-center justify-center mb-6 opacity-50 hover:opacity-100 transition-opacity duration-300">
           <span className="text-primary font-black uppercase tracking-[0.3em] text-xs">Shock Specialists</span>
         </div>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-0 mb-6 group cursor-crosshair">
-            <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white/40 group-hover:text-white transition-colors duration-300 italic drop-shadow-xl md:-mr-8 lg:-mr-16 z-0">
-              Custom
-            </h1>
-            <img 
-              src="https://i.imgur.com/3D6eBT8.png" 
-              alt="Custom Valdez Logo" 
-              className="h-40 md:h-56 lg:h-[20rem] w-auto object-contain opacity-40 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105 z-10"
-              referrerPolicy="no-referrer"
-            />
-            <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white/40 group-hover:text-white transition-colors duration-300 italic drop-shadow-xl md:-ml-8 lg:-ml-16 z-0">
-              Valdez
-            </h1>
-          </div>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-0 mb-6 group cursor-crosshair">
+          <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white/40 group-hover:text-white transition-colors duration-300 italic drop-shadow-xl md:-mr-8 lg:-mr-16 z-0">
+            Custom
+          </h1>
+          <img
+            src="https://i.imgur.com/3D6eBT8.png"
+            alt="Custom Valdez Logo"
+            className="h-40 md:h-56 lg:h-[20rem] w-auto object-contain opacity-40 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105 z-10"
+            referrerPolicy="no-referrer"
+          />
+          <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white/40 group-hover:text-white transition-colors duration-300 italic drop-shadow-xl md:-ml-8 lg:-ml-16 z-0">
+            Valdez
+          </h1>
+        </div>
         <p className="text-slate-300 text-lg md:text-xl font-medium max-w-lg mx-auto mb-10 leading-relaxed opacity-30 hover:opacity-100 transition-opacity duration-300">
           Especialistas en reparación, mantenimiento y personalización de amortiguadores de alto rendimiento.
         </p>
