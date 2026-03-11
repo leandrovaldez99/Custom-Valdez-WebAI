@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #00AEEF;
+  --color-primary-dark: #0087B7;
+  --color-background-light: #121212;
+  --color-background-dark: #000000;
+  --color-secondary-dark: #1a1a1a;
+  --color-text-main: #ffffff;
+  --color-text-light: #a0a0a0;
+
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-display text-text-main bg-background-light dark:bg-background-dark antialiased;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
