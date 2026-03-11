@@ -5,44 +5,54 @@ import { Link } from 'react-router-dom';
 
 
 const Hero = () => (
-  <section id="top" className="relative min-h-screen flex items-center overflow-hidden bg-black pt-20">
-    <div className="absolute inset-0 z-0">
-      <img 
-        src="https://i.imgur.com/UKBByX6.jpg" 
-        alt="Custom Valdez Workshop" 
-        className="w-full h-full object-cover opacity-40"
+  <section id="top" className="relative min-h-screen flex items-center overflow-hidden bg-black">
+    <div className="absolute inset-0 z-0 bg-black">
+      <img
+        src="https://i.imgur.com/UKBByX6.jpg"
+        alt="Custom Valdez Workshop"
+        className="w-full h-full object-cover opacity-30"
         referrerPolicy="no-referrer"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black"></div>
     </div>
-    
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-3xl mx-auto text-center group cursor-default"
-        >
-          <div className="flex items-center justify-center mb-6 transition-opacity duration-300 opacity-50 group-hover:opacity-100">
-            <span className="text-primary font-black uppercase tracking-[0.3em] text-xs">Shock Specialists</span>
+
+    <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-4 pb-24">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="max-w-3xl mx-auto text-center cursor-default"
+      >
+        <div className="flex items-center justify-center mb-6 opacity-50 hover:opacity-100 transition-opacity duration-300">
+          <span className="text-primary font-black uppercase tracking-[0.3em] text-xs">Shock Specialists</span>
+        </div>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-0 mb-6 group cursor-crosshair">
+            <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white/40 group-hover:text-white transition-colors duration-300 italic drop-shadow-xl md:-mr-8 lg:-mr-16 z-0">
+              Custom
+            </h1>
+            <img 
+              src="https://i.imgur.com/3D6eBT8.png" 
+              alt="Custom Valdez Logo" 
+              className="h-40 md:h-56 lg:h-[20rem] w-auto object-contain opacity-40 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105 z-10"
+              referrerPolicy="no-referrer"
+            />
+            <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white/40 group-hover:text-white transition-colors duration-300 italic drop-shadow-xl md:-ml-8 lg:-ml-16 z-0">
+              Valdez
+            </h1>
           </div>
-          <h1 className="text-white text-5xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter mb-8 italic transition-opacity duration-300 opacity-40 group-hover:opacity-100">
-            Domina <br /> El Camino
-          </h1>
-          <p className="text-slate-300 text-lg md:text-xl font-medium max-w-lg mx-auto mb-10 leading-relaxed transition-opacity duration-300 opacity-30 group-hover:opacity-100">
-            Especialistas en reparación, mantenimiento y personalización de amortiguadores de alto rendimiento.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 transition-opacity duration-300 opacity-40 group-hover:opacity-100">
-            <a 
-              href="#contact" 
-              className="bg-primary text-white px-10 py-4 rounded-sm font-black uppercase tracking-widest hover:bg-primary-dark transition-all flex items-center gap-3 group/btn"
-            >
-              Contactar Ahora
-              <div className="w-6 h-[2px] bg-white group-hover/btn:w-10 transition-all"></div>
-            </a>
-          </div>
-        </motion.div>
-      </div>
+        <p className="text-slate-300 text-lg md:text-xl font-medium max-w-lg mx-auto mb-10 leading-relaxed opacity-30 hover:opacity-100 transition-opacity duration-300">
+          Especialistas en reparación, mantenimiento y personalización de amortiguadores de alto rendimiento.
+        </p>
+        <div className="flex flex-wrap justify-center gap-4 opacity-70 hover:opacity-100 transition-opacity duration-300">
+          <a
+            href="#contact"
+            className="bg-primary text-white px-10 py-4 rounded-sm font-black uppercase tracking-widest hover:bg-primary-dark transition-all flex items-center justify-center"
+          >
+            Contactar Ahora
+          </a>
+        </div>
+      </motion.div>
+    </div>
   </section>
 );
 
@@ -63,26 +73,26 @@ const Services = () => (
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
         {[
-          { 
-            title: 'Service', 
-            desc: 'Mantenimiento preventivo y puesta a punto integral para tu suspensión.', 
+          {
+            title: 'Service',
+            desc: 'Mantenimiento preventivo y puesta a punto integral para tu suspensión.',
             icon: ShieldCheck,
             img: 'https://images.unsplash.com/photo-1591438122447-3e9f55a7a39a?auto=format&fit=crop&q=80&w=800'
           },
-          { 
-            title: 'Reparación', 
-            desc: 'Diagnóstico y solución de fallas con recambio de componentes de alta calidad.', 
+          {
+            title: 'Reparación',
+            desc: 'Diagnóstico y solución de fallas con recambio de componentes de alta calidad.',
             icon: Wrench,
             img: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800'
           },
-          { 
-            title: 'Restauración', 
-            desc: 'Recuperación estética y funcional completa a estándares de fábrica.', 
+          {
+            title: 'Restauración',
+            desc: 'Recuperación estética y funcional completa a estándares de fábrica.',
             icon: History,
             img: 'https://images.unsplash.com/photo-1502744691670-71517a542763?auto=format&fit=crop&q=80&w=800'
           },
         ].map((service, idx) => (
-          <motion.div 
+          <motion.div
             key={idx}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -90,9 +100,9 @@ const Services = () => (
             transition={{ delay: idx * 0.1 }}
             className="group relative h-[400px] overflow-hidden bg-zinc-900"
           >
-            <img 
-              src={service.img} 
-              alt={service.title} 
+            <img
+              src={service.img}
+              alt={service.title}
               className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
               referrerPolicy="no-referrer"
             />
@@ -119,9 +129,9 @@ const GalleryCTA = () => (
     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <div className="order-2 lg:order-1">
         <div className="relative aspect-video rounded-sm overflow-hidden shadow-2xl">
-          <img 
-            src="https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=1200" 
-            alt="Gallery Preview" 
+          <img
+            src="https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=1200"
+            alt="Gallery Preview"
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />
@@ -136,8 +146,8 @@ const GalleryCTA = () => (
         <p className="text-slate-400 text-lg font-medium mb-10 leading-relaxed">
           Explora nuestra galería de proyectos terminados. Calidad artesanal combinada con tecnología de vanguardia.
         </p>
-        <Link 
-          to="/gallery" 
+        <Link
+          to="/gallery"
           className="inline-flex items-center gap-4 text-white font-black uppercase tracking-widest text-sm group"
         >
           Ver Galería Completa
@@ -156,23 +166,23 @@ const Contact = () => (
       <h2 className="text-white text-4xl md:text-6xl font-black uppercase italic tracking-tighter mb-16">
         Conecta Con <span className="text-primary">Nosotros</span>
       </h2>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {[
-          { 
-            name: 'Facebook', 
-            handle: '@customvaldez', 
+          {
+            name: 'Facebook',
+            handle: '@customvaldez',
             url: 'https://www.facebook.com/customvaldez',
             color: '#1877F2',
             icon: (
               <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
               </svg>
             )
           },
-          { 
-            name: 'Instagram', 
-            handle: '@customvaldez', 
+          {
+            name: 'Instagram',
+            handle: '@customvaldez',
             url: 'https://www.instagram.com/customvaldez',
             color: '#E4405F',
             icon: (
@@ -183,19 +193,19 @@ const Contact = () => (
               </svg>
             )
           },
-          { 
-            name: 'WhatsApp', 
-            handle: 'Chatea con nosotros', 
+          {
+            name: 'WhatsApp',
+            handle: 'Chatea con nosotros',
             url: 'https://wa.me/+5493487623100',
             color: '#25D366',
             icon: (
               <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
               </svg>
             )
           },
         ].map((social, idx) => (
-          <a 
+          <a
             key={idx}
             href={social.url}
             target="_blank"

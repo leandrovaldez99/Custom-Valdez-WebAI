@@ -15,16 +15,17 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-background-light/95 shadow-lg py-3' : 'bg-transparent py-5'
-      }`}
+      className={`fixed left-0 right-0 z-50 transition-all duration-700 ease-in-out ${isScrolled
+        ? 'top-4 mx-4 md:mx-auto max-w-5xl bg-black/80 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-white/5 rounded-full py-3 px-2'
+        : 'top-[calc(var(--spacing)*1.9)] w-full bg-gradient-to-t from-black/90 to-transparent py-4'
+        }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div className="w-full px-6 flex items-center justify-between">
         <div className="flex items-center shrink-0">
           <Link to="/" className="flex items-center gap-3 group">
-            <img 
-              src="https://i.imgur.com/3D6eBT8.png" 
-              alt="Custom Valdez Logo" 
+            <img
+              src="https://i.imgur.com/3D6eBT8.png"
+              alt="Custom Valdez Logo"
               className="h-10 w-auto object-contain"
               referrerPolicy="no-referrer"
             />
@@ -52,9 +53,9 @@ const Header = () => {
         </nav>
 
         <div className="flex items-center gap-4">
-          <a 
-            href="https://wa.me/+5493487623100" 
-            target="_blank" 
+          <a
+            href="https://wa.me/+5493487623100"
+            target="_blank"
             rel="noopener noreferrer"
             className="hidden lg:flex items-center justify-center bg-primary text-white px-6 py-2 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-primary-dark transition-all"
           >
