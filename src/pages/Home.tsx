@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { Wrench, ShieldCheck, History, MessageCircle, Car, LayoutGrid, ChevronRight, ChevronLeft, Settings2 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { Link } from 'react-router-dom';
 
 const ProjectCarousel = ({ images, title }: { images: string[], title: string }) => {
@@ -63,57 +63,165 @@ const ProjectCarousel = ({ images, title }: { images: string[], title: string })
 };
 
 
-const Hero = () => (
-  <section id="top" className="relative min-h-screen flex items-center overflow-hidden bg-black">
-    <div className="absolute inset-0 z-0 bg-black">
-      <img
-        src="https://i.imgur.com/UKBByX6.jpg"
-        alt="Custom Valdez Workshop"
-        className="w-full h-full object-cover opacity-30"
-        referrerPolicy="no-referrer"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black"></div>
-    </div>
+const Hero = () => {
+  const sectionRef = useRef<HTMLElement>(null);
 
-    <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-4 pb-24">
+  // Mouse position as motion values (0 to 1 range, 0.5 = center)
+  const mouseX = useMotionValue(0.5);
+  const mouseY = useMotionValue(0.5);
+
+  // Smooth spring physics for fluid movement
+  const springConfig = { damping: 25, stiffness: 150, mass: 0.5 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
+  // 3D rotation transforms for the title group
+  const rotateX = useTransform(smoothY, [0, 1], [8, -8]);
+  const rotateY = useTransform(smoothX, [0, 1], [-8, 8]);
+
+  // Parallax offsets - text (shallow depth)
+  const textX = useTransform(smoothX, [0, 1], [-15, 15]);
+  const textY = useTransform(smoothY, [0, 1], [-10, 10]);
+
+  // Parallax offsets - logo (deeper depth, moves more)
+  const logoX = useTransform(smoothX, [0, 1], [-30, 30]);
+  const logoY = useTransform(smoothY, [0, 1], [-20, 20]);
+
+  // Spotlight position (percentage)
+  const spotlightX = useTransform(smoothX, [0, 1], [0, 100]);
+  const spotlightY = useTransform(smoothY, [0, 1], [0, 100]);
+
+  // Spotlight background gradient that follows mouse
+  const spotlightBackground = useTransform(
+    [spotlightX, spotlightY],
+    ([x, y]: number[]) =>
+      `radial-gradient(circle 400px at ${x}% ${y}%, rgba(0, 174, 239, 0.12) 0%, transparent 70%)`
+  );
+
+  // Spotlight opacity
+  const spotlightOpacity = useMotionValue(0);
+  const smoothSpotlightOpacity = useSpring(spotlightOpacity, { damping: 20, stiffness: 100 });
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    const rect = sectionRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    mouseX.set(x);
+    mouseY.set(y);
+    spotlightOpacity.set(1);
+  }, [mouseX, mouseY, spotlightOpacity]);
+
+  const handleMouseLeave = useCallback(() => {
+    mouseX.set(0.5);
+    mouseY.set(0.5);
+    spotlightOpacity.set(0);
+  }, [mouseX, mouseY, spotlightOpacity]);
+
+  return (
+    <section
+      id="top"
+      ref={sectionRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative min-h-screen flex items-center overflow-hidden bg-black"
+    >
+      <div className="absolute inset-0 z-0 bg-black">
+        <img
+          src="https://i.imgur.com/UKBByX6.jpg"
+          alt="Custom Valdez Workshop"
+          className="w-full h-full object-cover opacity-30"
+          referrerPolicy="no-referrer"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black"></div>
+      </div>
+
+      {/* Spotlight overlay that follows the mouse */}
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="max-w-3xl mx-auto text-center cursor-default"
-      >
-        <div className="flex items-center justify-center mb-6 opacity-50 hover:opacity-100 transition-opacity duration-300">
-          <span className="text-primary font-black uppercase tracking-[0.3em] text-xs">Shock Specialists</span>
-        </div>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-0 mb-6 group cursor-crosshair">
-          <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white/40 group-hover:text-white transition-colors duration-300 italic drop-shadow-xl md:-mr-8 lg:-mr-16 z-0">
-            Custom
-          </h1>
-          <img
-            src="https://i.imgur.com/3D6eBT8.png"
-            alt="Custom Valdez Logo"
-            className="h-40 md:h-56 lg:h-[20rem] w-auto object-contain opacity-40 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105 z-10"
-            referrerPolicy="no-referrer"
-          />
-          <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white/40 group-hover:text-white transition-colors duration-300 italic drop-shadow-xl md:-ml-8 lg:-ml-16 z-0">
-            Valdez
-          </h1>
-        </div>
-        <p className="text-slate-300 text-lg md:text-xl font-medium max-w-lg mx-auto mb-10 leading-relaxed opacity-30 hover:opacity-100 transition-opacity duration-300">
-          Especialistas en reparación, mantenimiento y personalización de amortiguadores de alto rendimiento.
-        </p>
-        <div className="flex flex-wrap justify-center gap-4 opacity-70 hover:opacity-100 transition-opacity duration-300">
-          <a
-            href="#contact"
-            className="bg-primary text-white px-10 py-4 rounded-sm font-black uppercase tracking-widest hover:bg-primary-dark transition-all flex items-center justify-center"
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          opacity: smoothSpotlightOpacity,
+          background: spotlightBackground,
+        }}
+      />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-4 pb-24">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-3xl mx-auto text-center cursor-default"
+          style={{
+            perspective: 1000,
+          }}
+        >
+          <div className="flex items-center justify-center mb-6 opacity-50 hover:opacity-100 transition-opacity duration-300">
+            <span className="text-primary font-black uppercase tracking-[0.3em] text-xs">Shock Specialists</span>
+          </div>
+
+          {/* 3D Tilt container */}
+          <motion.div
+            className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-0 mb-6 group cursor-crosshair"
+            style={{
+              rotateX,
+              rotateY,
+              transformStyle: 'preserve-3d',
+            }}
           >
-            Contactar Ahora
-          </a>
-        </div>
-      </motion.div>
-    </div>
-  </section>
-);
+            {/* "Custom" text - shallow parallax */}
+            <motion.h1
+              className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white/40 group-hover:text-white transition-colors duration-300 italic drop-shadow-xl md:-mr-8 lg:-mr-16 z-0"
+              style={{
+                x: textX,
+                y: textY,
+                translateZ: 20,
+              }}
+            >
+              Custom
+            </motion.h1>
+
+            {/* Logo - deeper parallax (moves more) */}
+            <motion.img
+              src="https://i.imgur.com/3D6eBT8.png"
+              alt="Custom Valdez Logo"
+              className="h-40 md:h-56 lg:h-[20rem] w-auto object-contain opacity-40 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105 z-10"
+              referrerPolicy="no-referrer"
+              style={{
+                x: logoX,
+                y: logoY,
+                translateZ: 50,
+              }}
+            />
+
+            {/* "Valdez" text - shallow parallax */}
+            <motion.h1
+              className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white/40 group-hover:text-white transition-colors duration-300 italic drop-shadow-xl md:-ml-8 lg:-ml-16 z-0"
+              style={{
+                x: textX,
+                y: textY,
+                translateZ: 20,
+              }}
+            >
+              Valdez
+            </motion.h1>
+          </motion.div>
+
+          <p className="text-slate-300 text-lg md:text-xl font-medium max-w-lg mx-auto mb-10 leading-relaxed opacity-30 hover:opacity-100 transition-opacity duration-300">
+            Especialistas en reparación, mantenimiento y personalización de amortiguadores de alto rendimiento.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 opacity-70 hover:opacity-100 transition-opacity duration-300">
+            <a
+              href="#contact"
+              className="bg-primary text-white px-10 py-4 rounded-sm font-black uppercase tracking-widest hover:bg-primary-dark transition-all flex items-center justify-center"
+            >
+              Contactar Ahora
+            </a>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
 
 const Services = () => (
   <section id="services" className="py-24 bg-background-light">
