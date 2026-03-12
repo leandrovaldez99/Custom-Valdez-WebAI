@@ -17,7 +17,7 @@ const Header = () => {
     <header
       className={`fixed left-0 right-0 z-50 transition-all duration-700 ease-in-out ${isScrolled
         ? 'top-4 mx-4 md:mx-auto max-w-5xl bg-black/80 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-white/5 rounded-full py-3 px-2'
-        : 'top-[calc(var(--spacing)*1.9)] w-full bg-black py-4'
+        : 'top-0 w-full bg-black/40 backdrop-blur-sm py-4'
         }`}
     >
       <div className="w-full px-6 flex items-center justify-between">
@@ -62,13 +62,14 @@ const Header = () => {
           <motion.a
             href="https://wa.me/+5493487623100"
             target="_blank"
-            rel="noopener opener noreferrer"
-            className="hidden lg:flex items-center justify-center bg-primary text-white px-6 py-2 rounded-sm text-[10px] font-black uppercase tracking-widest transition-all"
+            rel="noopener noreferrer"
+            className="hidden lg:flex items-center justify-center bg-primary text-white px-6 py-2 rounded-sm text-[10px] font-black uppercase tracking-widest"
             whileHover={{
               scale: 1.05,
+              backgroundColor: '#25D366',
             }}
             whileTap={{ scale: 0.95 }}
-            transition={{ type: 'tween', duration: 0.15, ease: 'easeOut' }}
+            transition={{ type: 'tween', duration: 0.2, ease: 'easeOut' }}
           >
             WhatsApp
           </motion.a>

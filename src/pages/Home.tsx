@@ -44,13 +44,13 @@ const ProjectCarousel = ({ images, title }: { images: string[], title: string })
 
       {images.length > 1 && (
         <>
-          <button 
+          <button
             onClick={prev}
             className="absolute left-2 top-1/2 -translate-y-1/2 size-8 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 transition-opacity hover:bg-primary z-20"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
-          <button 
+          <button
             onClick={next}
             className="absolute right-2 top-1/2 -translate-y-1/2 size-8 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 transition-opacity hover:bg-primary z-20"
           >
@@ -121,16 +121,16 @@ const Hero = () => {
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative min-h-screen flex items-center overflow-hidden bg-black"
+      className="relative min-h-screen flex items-center overflow-hidden bg-black pt-16 md:pt-20"
     >
       <div className="absolute inset-0 z-0 bg-black">
         <img
           src="https://i.imgur.com/UKBByX6.jpg"
           alt="Custom Valdez Workshop"
-          className="w-full h-full object-cover opacity-30"
+          className="w-full h-full object-cover opacity-40"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black"></div>
       </div>
 
       {/* Spotlight overlay that follows the mouse */}
@@ -198,7 +198,7 @@ const Hero = () => {
           <div className="flex flex-wrap justify-center gap-4 opacity-70 hover:opacity-100 transition-opacity duration-300">
             <a
               href="#contact"
-              className="bg-primary text-white px-10 py-4 rounded-sm font-black uppercase tracking-widest hover:bg-primary-dark transition-all flex items-center justify-center"
+              className="bg-primary text-white px-10 py-4 rounded-sm font-black uppercase tracking-widest hover:bg-primary-dark hover:scale-105 transition-all flex items-center justify-center"
             >
               Contactar Ahora
             </a>
@@ -226,41 +226,41 @@ const Services = () => (
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-1 max-w-4xl mx-auto">
         {[
-          { 
-            title: 'Service', 
-            desc: 'Mantenimiento preventivo y puesta a punto integral para tu suspensión.', 
+          {
+            title: 'Service',
+            desc: 'Mantenimiento preventivo y puesta a punto integral para tu suspensión.',
             icon: ShieldCheck,
-            img: 'https://images.unsplash.com/photo-1581234878501-7c944efbb781?auto=format&fit=crop&w=800&q=80'
+            img: '/service.png'
           },
-          { 
-            title: 'Restauración', 
-            desc: 'Recuperación estética y funcional completa a estándares de fábrica.', 
+          {
+            title: 'Restauración',
+            desc: 'Recuperación estética y funcional completa a estándares de fábrica.',
             icon: History,
-            img: 'https://images.unsplash.com/photo-1572826795145-9de694f8f71e?auto=format&fit=crop&w=800&q=80'
+            img: '/ohlins.png'
           },
         ].map((service, idx) => (
-          <motion.div 
+          <motion.div
             key={idx}
             initial={{ opacity: 0, y: 40, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ 
-              delay: idx * 0.2, 
-              duration: 0.6, 
-              type: "spring", 
-              stiffness: 100, 
-              damping: 15 
+            transition={{
+              delay: idx * 0.2,
+              duration: 0.6,
+              type: "spring",
+              stiffness: 100,
+              damping: 15
             }}
-            whileHover={{ 
-              y: -8, 
-              transition: { duration: 0.3, ease: "easeOut" } 
+            whileHover={{
+              y: -8,
+              transition: { duration: 0.3, ease: "easeOut" }
             }}
             className="group relative h-[400px] md:h-[450px] overflow-hidden bg-zinc-900 cursor-pointer"
           >
             {/* Background image with enhanced transitions */}
-            <motion.img 
-              src={service.img} 
-              alt={service.title} 
+            <motion.img
+              src={service.img}
+              alt={service.title}
               className="absolute inset-0 w-full h-full object-cover"
               initial={{ scale: 1.05 }}
               whileHover={{ scale: 1.15 }}
@@ -268,31 +268,31 @@ const Services = () => (
               style={{ opacity: 0.5 }}
               referrerPolicy="no-referrer"
             />
-            
+
             {/* Hover glow overlay */}
             <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-500 z-[1]"></div>
-            
+
             {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-[2]"></div>
-            
+
             {/* Content */}
             <div className="absolute bottom-0 left-0 p-8 w-full z-[3]">
               {/* Icon */}
               <div className="text-primary mb-4">
                 <service.icon className="w-9 h-9 drop-shadow-[0_0_8px_rgba(0,174,239,0.4)] group-hover:drop-shadow-[0_0_16px_rgba(0,174,239,0.7)] transition-all duration-500" />
               </div>
-              
+
               <h3 className="text-white text-2xl font-black uppercase italic tracking-tighter mb-2 group-hover:text-primary transition-colors duration-300">
                 {service.title}
               </h3>
-              
+
               {/* Description with slide-up animation */}
               <div className="overflow-hidden">
                 <p className="text-slate-300 text-sm font-medium mb-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400 ease-out">
                   {service.desc}
                 </p>
               </div>
-              
+
               {/* Animated bottom line */}
               <div className="relative h-[2px] w-full bg-white/10 overflow-hidden">
                 <div className="absolute inset-y-0 left-0 w-0 bg-primary group-hover:w-full transition-all duration-700 ease-out shadow-[0_0_10px_rgba(0,174,239,0.5)]"></div>
@@ -320,38 +320,38 @@ const GallerySection = () => (
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
         {[
-          { 
-            title: 'Refurb KW', 
-            vehicle: 'BMW M3 E92', 
-            images: ['https://picsum.photos/seed/kw-after/600/400', 'https://picsum.photos/seed/kw-before/600/400'] 
+          {
+            title: 'Refurb KW',
+            vehicle: 'BMW M3 E92',
+            images: ['https://picsum.photos/seed/kw-after/600/400', 'https://picsum.photos/seed/kw-before/600/400']
           },
-          { 
-            title: 'King Shocks', 
-            vehicle: 'TOYOTA TUNDRA', 
-            images: ['https://picsum.photos/seed/king-after/600/400', 'https://picsum.photos/seed/king-before/600/400'] 
+          {
+            title: 'King Shocks',
+            vehicle: 'TOYOTA TUNDRA',
+            images: ['https://picsum.photos/seed/king-after/600/400', 'https://picsum.photos/seed/king-before/600/400']
           },
-          { 
-            title: 'Fox 2.0 Restore', 
-            vehicle: 'JEEP WRANGLER', 
-            images: ['https://picsum.photos/seed/fox-after/600/400', 'https://picsum.photos/seed/fox-before/600/400'] 
+          {
+            title: 'Fox 2.0 Restore',
+            vehicle: 'JEEP WRANGLER',
+            images: ['https://picsum.photos/seed/fox-after/600/400', 'https://picsum.photos/seed/fox-before/600/400']
           },
-          { 
-            title: 'Öhlins Service', 
-            vehicle: 'DUCATI 996', 
-            images: ['https://picsum.photos/seed/ohlins-after/600/400', 'https://picsum.photos/seed/ohlins-before/600/400'] 
+          {
+            title: 'Öhlins Service',
+            vehicle: 'DUCATI 996',
+            images: ['https://picsum.photos/seed/ohlins-after/600/400', 'https://picsum.photos/seed/ohlins-before/600/400']
           },
-          { 
-            title: 'Bilstein B6', 
-            vehicle: 'PORSCHE 911', 
-            images: ['https://picsum.photos/seed/bilstein-after/600/400', 'https://picsum.photos/seed/bilstein-before/600/400'] 
+          {
+            title: 'Bilstein B6',
+            vehicle: 'PORSCHE 911',
+            images: ['https://picsum.photos/seed/bilstein-after/600/400', 'https://picsum.photos/seed/bilstein-before/600/400']
           },
-          { 
-            title: 'Ford Raptor SVT', 
-            vehicle: 'FORD RAPTOR', 
-            images: ['https://picsum.photos/seed/raptor-after/600/400', 'https://picsum.photos/seed/raptor-before/600/400'] 
+          {
+            title: 'Ford Raptor SVT',
+            vehicle: 'FORD RAPTOR',
+            images: ['https://picsum.photos/seed/raptor-after/600/400', 'https://picsum.photos/seed/raptor-before/600/400']
           },
         ].map((project, idx) => (
-          <motion.div 
+          <motion.div
             key={idx}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -377,12 +377,12 @@ const Contact = () => (
       <h2 className="text-white text-4xl md:text-6xl font-black uppercase italic tracking-tighter mb-16">
         Conecta Con <span className="text-primary">Nosotros</span>
       </h2>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {[
-          { 
-            name: 'Facebook', 
-            handle: '@customvaldez', 
+          {
+            name: 'Facebook',
+            handle: '@customvaldez',
             url: 'https://www.facebook.com/customvaldez',
             color: '#1877F2',
             icon: (
@@ -391,9 +391,9 @@ const Contact = () => (
               </svg>
             )
           },
-          { 
-            name: 'Instagram', 
-            handle: '@customvaldez', 
+          {
+            name: 'Instagram',
+            handle: '@customvaldez',
             url: 'https://www.instagram.com/customvaldez',
             color: '#E4405F',
             icon: (
@@ -404,9 +404,9 @@ const Contact = () => (
               </svg>
             )
           },
-          { 
-            name: 'WhatsApp', 
-            handle: 'Chatea con nosotros', 
+          {
+            name: 'WhatsApp',
+            handle: 'Chatea con nosotros',
             url: 'https://wa.me/+5493487623100',
             color: '#25D366',
             icon: (

@@ -37,7 +37,7 @@ export default function App() {
       <ScrollToTop />
       <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background-light">
         <Header />
-        <main className="flex-1 pt-16 md:pt-20">
+        <main className="flex-1">
           <AnimatePresence mode="wait">
             <Routes>
               <Route path="/" element={
