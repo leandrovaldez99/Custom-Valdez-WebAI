@@ -224,51 +224,79 @@ const Services = () => (
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-1 max-w-4xl mx-auto">
         {[
           { 
             title: 'Service', 
             desc: 'Mantenimiento preventivo y puesta a punto integral para tu suspensión.', 
             icon: ShieldCheck,
-            img: 'https://images.unsplash.com/photo-1591438122447-3e9f55a7a39a?auto=format&fit=crop&q=80&w=800'
-          },
-          { 
-            title: 'Reparación', 
-            desc: 'Diagnóstico y solución de fallas con recambio de componentes de alta calidad.', 
-            icon: Wrench,
-            img: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800'
+            img: 'https://images.unsplash.com/photo-1581234878501-7c944efbb781?auto=format&fit=crop&w=800&q=80'
           },
           { 
             title: 'Restauración', 
             desc: 'Recuperación estética y funcional completa a estándares de fábrica.', 
             icon: History,
-            img: 'https://images.unsplash.com/photo-1502744691670-71517a542763?auto=format&fit=crop&q=80&w=800'
+            img: 'https://images.unsplash.com/photo-1572826795145-9de694f8f71e?auto=format&fit=crop&w=800&q=80'
           },
         ].map((service, idx) => (
           <motion.div 
             key={idx}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: idx * 0.1 }}
-            className="group relative h-[400px] overflow-hidden bg-zinc-900"
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ 
+              delay: idx * 0.2, 
+              duration: 0.6, 
+              type: "spring", 
+              stiffness: 100, 
+              damping: 15 
+            }}
+            whileHover={{ 
+              y: -8, 
+              transition: { duration: 0.3, ease: "easeOut" } 
+            }}
+            className="group relative h-[400px] md:h-[450px] overflow-hidden bg-zinc-900 cursor-pointer"
           >
-            <img 
+            {/* Background image with enhanced transitions */}
+            <motion.img 
               src={service.img} 
               alt={service.title} 
-              className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
+              className="absolute inset-0 w-full h-full object-cover"
+              initial={{ scale: 1.05 }}
+              whileHover={{ scale: 1.15 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              style={{ opacity: 0.5 }}
               referrerPolicy="no-referrer"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-            <div className="absolute bottom-0 left-0 p-8 w-full">
+            
+            {/* Hover glow overlay */}
+            <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-500 z-[1]"></div>
+            
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-[2]"></div>
+            
+            {/* Content */}
+            <div className="absolute bottom-0 left-0 p-8 w-full z-[3]">
+              {/* Icon */}
               <div className="text-primary mb-4">
-                <service.icon className="w-8 h-8" />
+                <service.icon className="w-9 h-9 drop-shadow-[0_0_8px_rgba(0,174,239,0.4)] group-hover:drop-shadow-[0_0_16px_rgba(0,174,239,0.7)] transition-all duration-500" />
               </div>
-              <h3 className="text-white text-2xl font-black uppercase italic tracking-tighter mb-2">{service.title}</h3>
-              <p className="text-slate-300 text-sm font-medium mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {service.desc}
-              </p>
-              <div className="w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-500"></div>
+              
+              <h3 className="text-white text-2xl font-black uppercase italic tracking-tighter mb-2 group-hover:text-primary transition-colors duration-300">
+                {service.title}
+              </h3>
+              
+              {/* Description with slide-up animation */}
+              <div className="overflow-hidden">
+                <p className="text-slate-300 text-sm font-medium mb-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400 ease-out">
+                  {service.desc}
+                </p>
+              </div>
+              
+              {/* Animated bottom line */}
+              <div className="relative h-[2px] w-full bg-white/10 overflow-hidden">
+                <div className="absolute inset-y-0 left-0 w-0 bg-primary group-hover:w-full transition-all duration-700 ease-out shadow-[0_0_10px_rgba(0,174,239,0.5)]"></div>
+              </div>
             </div>
           </motion.div>
         ))}
