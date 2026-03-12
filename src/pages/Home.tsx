@@ -83,9 +83,6 @@ const Hero = () => {
   const textX = useTransform(smoothX, [0, 1], [-15, 15]);
   const textY = useTransform(smoothY, [0, 1], [-10, 10]);
 
-  // Parallax offsets - logo (deeper depth, moves more)
-  const logoX = useTransform(smoothX, [0, 1], [-30, 30]);
-  const logoY = useTransform(smoothY, [0, 1], [-20, 20]);
 
   // Spotlight position (percentage)
   const spotlightX = useTransform(smoothX, [0, 1], [0, 100]);
@@ -155,55 +152,44 @@ const Hero = () => {
             perspective: 1000,
           }}
         >
-          <div className="flex items-center justify-center mb-6 opacity-50 hover:opacity-100 transition-opacity duration-300">
-            <span className="text-primary font-black uppercase tracking-[0.3em] text-xs">Shock Specialists</span>
-          </div>
-
-          {/* 3D Tilt container */}
+          {/* 3D Tilt container - parallax applied to the whole group */}
           <motion.div
             className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-0 mb-6 group cursor-crosshair"
             style={{
               rotateX,
               rotateY,
+              x: textX,
+              y: textY,
               transformStyle: 'preserve-3d',
             }}
           >
-            {/* "Custom" text - shallow parallax */}
-            <motion.h1
-              className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white/40 group-hover:text-white transition-colors duration-300 italic drop-shadow-xl md:-mr-8 lg:-mr-16 z-0"
-              style={{
-                x: textX,
-                y: textY,
-                translateZ: 20,
-              }}
-            >
-              Custom
-            </motion.h1>
+            {/* "Custom" text + "Shock Specialists" subtitle */}
+            <div className="flex flex-col items-center md:items-end md:-mr-8 lg:-mr-16 z-0">
+              <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white/40 group-hover:text-white transition-colors duration-300 italic drop-shadow-xl">
+                Custom
+              </h1>
+              <span className="text-primary font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mt-1 opacity-50 group-hover:opacity-100 transition-opacity duration-300">
+                Shock Specialists
+              </span>
+            </div>
 
-            {/* Logo - deeper parallax (moves more) */}
-            <motion.img
+            {/* Logo */}
+            <img
               src="https://i.imgur.com/3D6eBT8.png"
               alt="Custom Valdez Logo"
               className="h-40 md:h-56 lg:h-[20rem] w-auto object-contain opacity-40 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105 z-10"
               referrerPolicy="no-referrer"
-              style={{
-                x: logoX,
-                y: logoY,
-                translateZ: 50,
-              }}
             />
 
-            {/* "Valdez" text - shallow parallax */}
-            <motion.h1
-              className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white/40 group-hover:text-white transition-colors duration-300 italic drop-shadow-xl md:-ml-8 lg:-ml-16 z-0"
-              style={{
-                x: textX,
-                y: textY,
-                translateZ: 20,
-              }}
-            >
-              Valdez
-            </motion.h1>
+            {/* "Valdez" text + "Since 2000" subtitle */}
+            <div className="flex flex-col items-center md:items-start md:-ml-8 lg:-ml-16 z-0">
+              <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white/40 group-hover:text-white transition-colors duration-300 italic drop-shadow-xl">
+                Valdez
+              </h1>
+              <span className="text-primary font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mt-1 opacity-50 group-hover:opacity-100 transition-opacity duration-300 md:pl-3">
+                Since 2000
+              </span>
+            </div>
           </motion.div>
 
           <p className="text-slate-300 text-lg md:text-xl font-medium max-w-lg mx-auto mb-10 leading-relaxed opacity-30 hover:opacity-100 transition-opacity duration-300">

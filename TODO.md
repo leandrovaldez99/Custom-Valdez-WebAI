@@ -1,9 +1,15 @@
-# Mouse Animation for Custom Valdez Hero
+# Header & Hero Improvements - COMPLETED
 
-## Steps
-- [x] 1. Update Hero component in `src/pages/Home.tsx` to add mouse tracking state and handlers
-- [x] 2. Add 3D parallax tilt effect on "Custom / Logo / Valdez" group
-- [x] 3. Add radial spotlight gradient that follows the cursor
-- [x] 4. Add smooth reset when mouse leaves the section
-- [x] 5. Fix: Move useTransform hook to top level (rules of hooks compliance)
-- [x] 6. Test in browser to verify animations work correctly ✅ Confirmed by user
+## Header
+- [x] Change non-scrolled header background from gradient to solid black
+- [x] Keep scrolled state as-is (bg-black/80 with backdrop blur)
+- [x] Add hover animation to nav category links (underline slide-in + subtle scale)
+- [x] Logo-only header (removed "Custom Valdez" text)
+- [x] WhatsApp button: removed glow, fast tween transition (0.15s)
+
+## Hero
+- [x] Restructured layout: "Custom [Logo] Valdez" in a row
+- [x] Added "Shock Specialists" subtitle below "Custom"
+- [x] Added "Since 2000" subtitle below "Valdez"
+- [x] Fixed parallax: entire group moves as one unit (no independent logo movement)
+- [x] Aligned "Since 2000" with bottom of "V" in Valdez (md:pl-3)
