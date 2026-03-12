@@ -1,7 +1,66 @@
-import React from 'react';
-import { Wrench, ShieldCheck, History, MessageCircle, Car, LayoutGrid } from 'lucide-react';
-import { motion } from 'motion/react';
+import React, { useState, useRef } from 'react';
+import { Wrench, ShieldCheck, History, MessageCircle, Car, LayoutGrid, ChevronRight, ChevronLeft, Settings2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
+
+const ProjectCarousel = ({ images, title }: { images: string[], title: string }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const next = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  return (
+    <div className="relative aspect-video overflow-hidden group/carousel">
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={currentIndex}
+          src={images[currentIndex]}
+          alt={`${title} - Vista ${currentIndex + 1}`}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.4 }}
+          className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+          referrerPolicy="no-referrer"
+          loading="lazy"
+        />
+      </AnimatePresence>
+
+      {/* Labels for Before/After */}
+      <div className="absolute top-3 left-3 z-10">
+        <div className={`px-2 py-1 text-[9px] font-black uppercase tracking-widest rounded-sm transition-all duration-300 ${currentIndex === 0 ? 'bg-primary/80 text-white' : 'bg-black/80 text-white'}`}>
+          {currentIndex === 0 ? 'Después' : 'Antes'}
+        </div>
+      </div>
+
+      {images.length > 1 && (
+        <>
+          <button 
+            onClick={prev}
+            className="absolute left-2 top-1/2 -translate-y-1/2 size-8 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 transition-opacity hover:bg-primary z-20"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button 
+            onClick={next}
+            className="absolute right-2 top-1/2 -translate-y-1/2 size-8 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 transition-opacity hover:bg-primary z-20"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </>
+      )}
+    </div>
+  );
+};
 
 
 const Hero = () => (
@@ -73,26 +132,26 @@ const Services = () => (
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
         {[
-          {
-            title: 'Service',
-            desc: 'Mantenimiento preventivo y puesta a punto integral para tu suspensión.',
+          { 
+            title: 'Service', 
+            desc: 'Mantenimiento preventivo y puesta a punto integral para tu suspensión.', 
             icon: ShieldCheck,
             img: 'https://images.unsplash.com/photo-1591438122447-3e9f55a7a39a?auto=format&fit=crop&q=80&w=800'
           },
-          {
-            title: 'Reparación',
-            desc: 'Diagnóstico y solución de fallas con recambio de componentes de alta calidad.',
+          { 
+            title: 'Reparación', 
+            desc: 'Diagnóstico y solución de fallas con recambio de componentes de alta calidad.', 
             icon: Wrench,
             img: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800'
           },
-          {
-            title: 'Restauración',
-            desc: 'Recuperación estética y funcional completa a estándares de fábrica.',
+          { 
+            title: 'Restauración', 
+            desc: 'Recuperación estética y funcional completa a estándares de fábrica.', 
             icon: History,
             img: 'https://images.unsplash.com/photo-1502744691670-71517a542763?auto=format&fit=crop&q=80&w=800'
           },
         ].map((service, idx) => (
-          <motion.div
+          <motion.div 
             key={idx}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -100,9 +159,9 @@ const Services = () => (
             transition={{ delay: idx * 0.1 }}
             className="group relative h-[400px] overflow-hidden bg-zinc-900"
           >
-            <img
-              src={service.img}
-              alt={service.title}
+            <img 
+              src={service.img} 
+              alt={service.title} 
               className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
               referrerPolicy="no-referrer"
             />
@@ -124,37 +183,67 @@ const Services = () => (
   </section>
 );
 
-const GalleryCTA = () => (
-  <section className="bg-black py-24">
-    <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <div className="order-2 lg:order-1">
-        <div className="relative aspect-video rounded-sm overflow-hidden shadow-2xl">
-          <img
-            src="https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=1200"
-            alt="Gallery Preview"
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-primary/10 mix-blend-overlay"></div>
+const GallerySection = () => (
+  <section id="gallery" className="bg-black py-24 scroll-mt-20">
+    <div className="max-w-7xl mx-auto px-6">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+        <div className="max-w-2xl">
+          <span className="text-primary font-black uppercase tracking-[0.3em] text-xs mb-4 block">Portafolio</span>
+          <h2 className="text-white text-4xl md:text-6xl font-black uppercase italic tracking-tighter mb-4">
+            Trabajos <span className="text-primary">Realizados</span>
+          </h2>
+          <div className="w-20 h-1 bg-primary mb-6"></div>
         </div>
       </div>
-      <div className="order-1 lg:order-2">
-        <span className="text-primary font-black uppercase tracking-[0.3em] text-xs mb-4 block">Portafolio</span>
-        <h2 className="text-white text-4xl md:text-6xl font-black uppercase italic tracking-tighter mb-6">
-          Trabajos <br /> Realizados
-        </h2>
-        <p className="text-slate-400 text-lg font-medium mb-10 leading-relaxed">
-          Explora nuestra galería de proyectos terminados. Calidad artesanal combinada con tecnología de vanguardia.
-        </p>
-        <Link
-          to="/gallery"
-          className="inline-flex items-center gap-4 text-white font-black uppercase tracking-widest text-sm group"
-        >
-          Ver Galería Completa
-          <div className="size-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all">
-            <LayoutGrid className="w-4 h-4 text-white" />
-          </div>
-        </Link>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
+        {[
+          { 
+            title: 'Refurb KW', 
+            vehicle: 'BMW M3 E92', 
+            images: ['https://picsum.photos/seed/kw-after/600/400', 'https://picsum.photos/seed/kw-before/600/400'] 
+          },
+          { 
+            title: 'King Shocks', 
+            vehicle: 'TOYOTA TUNDRA', 
+            images: ['https://picsum.photos/seed/king-after/600/400', 'https://picsum.photos/seed/king-before/600/400'] 
+          },
+          { 
+            title: 'Fox 2.0 Restore', 
+            vehicle: 'JEEP WRANGLER', 
+            images: ['https://picsum.photos/seed/fox-after/600/400', 'https://picsum.photos/seed/fox-before/600/400'] 
+          },
+          { 
+            title: 'Öhlins Service', 
+            vehicle: 'DUCATI 996', 
+            images: ['https://picsum.photos/seed/ohlins-after/600/400', 'https://picsum.photos/seed/ohlins-before/600/400'] 
+          },
+          { 
+            title: 'Bilstein B6', 
+            vehicle: 'PORSCHE 911', 
+            images: ['https://picsum.photos/seed/bilstein-after/600/400', 'https://picsum.photos/seed/bilstein-before/600/400'] 
+          },
+          { 
+            title: 'Ford Raptor SVT', 
+            vehicle: 'FORD RAPTOR', 
+            images: ['https://picsum.photos/seed/raptor-after/600/400', 'https://picsum.photos/seed/raptor-before/600/400'] 
+          },
+        ].map((project, idx) => (
+          <motion.div 
+            key={idx}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: idx * 0.1 }}
+            className="group relative overflow-hidden bg-secondary-dark/50 border border-white/5"
+          >
+            <ProjectCarousel images={project.images} title={project.title} />
+            <div className="p-6 bg-zinc-900/50">
+              <h3 className="text-white text-lg font-black uppercase italic tracking-tighter mb-1">{project.title}</h3>
+              <p className="text-primary text-[10px] font-black uppercase tracking-widest">{project.vehicle}</p>
+            </div>
+          </motion.div>
+        ))}
       </div>
     </div>
   </section>
@@ -166,12 +255,12 @@ const Contact = () => (
       <h2 className="text-white text-4xl md:text-6xl font-black uppercase italic tracking-tighter mb-16">
         Conecta Con <span className="text-primary">Nosotros</span>
       </h2>
-
+      
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {[
-          {
-            name: 'Facebook',
-            handle: '@customvaldez',
+          { 
+            name: 'Facebook', 
+            handle: '@customvaldez', 
             url: 'https://www.facebook.com/customvaldez',
             color: '#1877F2',
             icon: (
@@ -180,9 +269,9 @@ const Contact = () => (
               </svg>
             )
           },
-          {
-            name: 'Instagram',
-            handle: '@customvaldez',
+          { 
+            name: 'Instagram', 
+            handle: '@customvaldez', 
             url: 'https://www.instagram.com/customvaldez',
             color: '#E4405F',
             icon: (
@@ -193,9 +282,9 @@ const Contact = () => (
               </svg>
             )
           },
-          {
-            name: 'WhatsApp',
-            handle: 'Chatea con nosotros',
+          { 
+            name: 'WhatsApp', 
+            handle: 'Chatea con nosotros', 
             url: 'https://wa.me/+5493487623100',
             color: '#25D366',
             icon: (
@@ -245,7 +334,7 @@ const Home = () => {
     <>
       <Hero />
       <Services />
-      <GalleryCTA />
+      <GallerySection />
       <Contact />
       <MapSection />
     </>

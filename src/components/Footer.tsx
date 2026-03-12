@@ -39,7 +39,7 @@ const Footer = () => (
           <ul className="flex flex-col gap-4">
             <li><Link to="/#top" className="text-slate-400 hover:text-primary transition-colors text-sm">Inicio</Link></li>
             <li><Link to="/#services" className="text-slate-400 hover:text-primary transition-colors text-sm">Servicios</Link></li>
-            <li><Link to="/gallery" className="text-slate-400 hover:text-primary transition-colors text-sm">Galería</Link></li>
+            <li><Link to="/#gallery" className="text-slate-400 hover:text-primary transition-colors text-sm">Galería</Link></li>
             <li><Link to="/#contact" className="text-slate-400 hover:text-primary transition-colors text-sm">Contacto</Link></li>
           </ul>
         </div>
@@ -58,7 +58,7 @@ const Footer = () => (
             </li>
             <li className="flex gap-4">
               <Mail className="w-5 h-5 text-primary shrink-0" />
-              <span className="text-slate-400 text-sm">contacto@customvaldez.com</span>
+              <span className="text-slate-400 text-sm">customvaldez@yahoo.com</span>
             </li>
           </ul>
         </div>

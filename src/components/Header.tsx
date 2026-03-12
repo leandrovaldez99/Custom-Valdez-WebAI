@@ -39,7 +39,7 @@ const Header = () => {
           {[
             { label: 'Inicio', to: '/#top' },
             { label: 'Servicios', to: '/#services' },
-            { label: 'Galería', to: '/gallery' },
+            { label: 'Galería', to: '/#gallery' },
             { label: 'Contacto', to: '/#contact' },
           ].map((item) => (
             <Link
@@ -56,7 +56,7 @@ const Header = () => {
           <a
             href="https://wa.me/+5493487623100"
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener opener noreferrer"
             className="hidden lg:flex items-center justify-center bg-primary text-white px-6 py-2 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-primary-dark transition-all"
           >
             WhatsApp
