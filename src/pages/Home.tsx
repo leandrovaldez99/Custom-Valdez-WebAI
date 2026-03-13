@@ -474,10 +474,62 @@ const MapSection = () => (
 
 
 
+const LogoBar = () => {
+  const logos = [
+    'elka.png',
+    'fastace.png',
+    'kayaba.png',
+    'marzocchi.png',
+    'ohlinslogo.png',
+    'sachs.png',
+    'showa.png',
+    'wp.png',
+    'yss.png',
+  ];
+
+  return (
+    <div className="w-full bg-zinc-900/50 border-y border-white/5 py-8 overflow-hidden flex items-center relative">
+      {/* Gradient masks for smooth edges */}
+      <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background-light to-transparent z-10"></div>
+      <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-background-light to-transparent z-10"></div>
+      
+      <motion.div
+        className="flex items-center whitespace-nowrap"
+        animate={{
+          x: ["0%", "-50%"],
+        }}
+        transition={{
+          duration: 30,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      >
+        {/* Render logos twice for seamless loop */}
+        {[...logos, ...logos].map((logo, idx) => (
+          <div key={idx} className="relative group/logo flex items-center justify-center px-8 md:px-12">
+            {/* Background Glow */}
+            <div className="absolute inset-0 bg-primary/5 blur-xl rounded-full opacity-0 group-hover/logo:opacity-100 transition-opacity duration-500"></div>
+            
+            <img
+              src={`/${logo}`}
+              alt={`Marca ${logo.split('.')[0]}`}
+              className={`${
+                logo === 'showa.png' ? 'h-6 md:h-7' : 'h-8 md:h-10'
+              } w-auto object-contain grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer relative z-10`}
+              referrerPolicy="no-referrer"
+            />
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  );
+};
+
 const Home = () => {
   return (
     <>
       <Hero />
+      <LogoBar />
       <Services />
       <GallerySection />
       <Contact />
