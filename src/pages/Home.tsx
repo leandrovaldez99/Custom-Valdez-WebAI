@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { Wrench, ShieldCheck, History, MessageCircle, Car, LayoutGrid, ChevronRight, ChevronLeft, Settings2 } from 'lucide-react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { Link } from 'react-router-dom';
@@ -66,6 +66,18 @@ const ProjectCarousel = ({ images, title }: { images: string[], title: string })
 const Hero = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
+  // Rotating hero images
+  const images = ['/motocross.jpg', '/motopista.png', '/motoviaje.jpeg'];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 10000); // 10 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   // Mouse position as motion values (0 to 1 range, 0.5 = center)
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
@@ -124,12 +136,19 @@ const Hero = () => {
       className="relative min-h-screen flex items-center overflow-hidden bg-black pt-16 md:pt-20"
     >
       <div className="absolute inset-0 z-0 bg-black">
-        <img
-          src="https://i.imgur.com/UKBByX6.jpg"
-          alt="Custom Valdez Workshop"
-          className="w-full h-full object-cover opacity-40"
-          referrerPolicy="no-referrer"
-        />
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={currentImageIndex}
+            src={images[currentImageIndex]}
+            alt={`Custom Valdez Workshop - ${currentImageIndex + 1}`}
+            className="w-full h-full object-cover opacity-40"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.02 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            referrerPolicy="no-referrer"
+          />
+        </AnimatePresence>
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black"></div>
       </div>
 
@@ -165,10 +184,10 @@ const Hero = () => {
           >
             {/* "Custom" text + "Shock Specialists" subtitle */}
             <div className="flex flex-col items-center md:items-end md:-mr-8 lg:-mr-16 z-0">
-              <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white/40 group-hover:text-white transition-colors duration-300 italic drop-shadow-xl">
+              <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white italic drop-shadow-xl">
                 Custom
               </h1>
-              <span className="text-primary font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mt-1 opacity-50 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="text-primary font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mt-1 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
                 Shock Specialists
               </span>
             </div>
@@ -177,25 +196,27 @@ const Hero = () => {
             <img
               src="https://i.imgur.com/3D6eBT8.png"
               alt="Custom Valdez Logo"
-              className="h-40 md:h-56 lg:h-[20rem] w-auto object-contain opacity-40 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105 z-10"
+              className="h-40 md:h-56 lg:h-[20rem] w-auto object-contain opacity-100 z-10"
               referrerPolicy="no-referrer"
             />
 
             {/* "Valdez" text + "Since 2000" subtitle */}
             <div className="flex flex-col items-center md:items-start md:-ml-8 lg:-ml-16 z-0">
-              <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white/40 group-hover:text-white transition-colors duration-300 italic drop-shadow-xl">
+              <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black uppercase tracking-tighter leading-none text-white italic drop-shadow-xl">
                 Valdez
               </h1>
-              <span className="text-primary font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mt-1 opacity-50 group-hover:opacity-100 transition-opacity duration-300 md:pl-3">
+              <span className="text-primary font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mt-1 opacity-80 group-hover:opacity-100 transition-opacity duration-300 md:pl-3">
                 Since 2000
               </span>
             </div>
           </motion.div>
 
-          <p className="text-slate-300 text-lg md:text-xl font-medium max-w-lg mx-auto mb-10 leading-relaxed opacity-30 hover:opacity-100 transition-opacity duration-300">
-            Especialistas en reparación, mantenimiento y personalización de amortiguadores de alto rendimiento.
+
+
+          <p className="text-slate-300 text-lg md:text-xl font-medium max-w-lg mx-auto mb-10 leading-relaxed opacity-70 hover:opacity-100 transition-opacity duration-300">
+            Especialistas en reparación, mantenimiento y personalización de amortiguadores y monoshoks.
           </p>
-          <div className="flex flex-wrap justify-center gap-4 opacity-70 hover:opacity-100 transition-opacity duration-300">
+          <div className="flex flex-wrap justify-center gap-4 opacity-95 hover:opacity-100 transition-opacity duration-300">
             <a
               href="#contact"
               className="bg-primary text-white px-10 py-4 rounded-sm font-black uppercase tracking-widest hover:bg-primary-dark hover:scale-105 transition-all flex items-center justify-center"

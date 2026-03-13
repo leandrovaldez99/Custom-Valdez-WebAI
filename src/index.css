@@ -23,3 +23,8 @@
     @apply font-display text-text-main bg-background-light dark:bg-background-dark antialiased;
   }
 }
+
+.hamburger-line {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+

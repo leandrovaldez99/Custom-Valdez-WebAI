@@ -18,7 +18,7 @@ const Footer = () => (
             <span className="text-xl font-black uppercase tracking-tight">Custom Valdez</span>
           </div>
           <p className="text-slate-400 text-sm leading-relaxed">
-            Ingeniería de suspensión de alto rendimiento. Especialistas en reparación, mantenimiento y personalización de amortiguadores.
+            Ingeniería de suspensión de alto rendimiento. Especialistas en reparación, mantenimiento y personalización de amortiguadores y monoshoks.
           </p>
           <div className="flex gap-4">
             <a href="https://www.facebook.com/customvaldez" target="_blank" rel="noopener noreferrer" className="size-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-all">
@@ -86,7 +86,7 @@ const Footer = () => (
       {/* Bottom Bar */}
       <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
         <p className="text-slate-500 text-xs font-medium uppercase tracking-widest">
-          © 2024 Custom Valdez. Todos los derechos reservados.
+          © 2000 Custom Valdez. Todos los derechos reservados.
         </p>
         <div className="flex gap-8">
           <a href="#" className="text-slate-600 hover:text-primary text-[10px] font-black uppercase tracking-widest transition-colors">Privacidad</a>
