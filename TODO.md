@@ -1,0 +1,1 @@
+# Task Progress: Make scrolling LogoBar logos 100% smaller (effectively hide/zero height)\n\n## Steps:\n- [x] Edit LogoBar img class in src/pages/Home.tsx: change h-10 md:h-12 lg:h-14 to h-0 md:h-0 lg:h-0 (100% reduction)\n- [x] Update max-h-16 to max-h-0\n- [x] Test visual change and responsiveness\n- [x] Update TODO.md as completed\n- [ ] attempt_completion

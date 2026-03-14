@@ -67,7 +67,7 @@ const Hero = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   // Rotating hero images
-  const images = ['/motocross.jpg', '/motopista.png', '/motoviaje.jpeg'];
+  const images = ['https://i.imgur.com/NWaFz2K.jpg', 'https://i.imgur.com/Es8hM4M.jpg', 'https://i.imgur.com/55YfQsT.jpg'];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -251,13 +251,13 @@ const Services = () => (
             title: 'Service',
             desc: 'Mantenimiento preventivo y puesta a punto integral para tu suspensión.',
             icon: ShieldCheck,
-            img: '/service.png'
+            img: 'https://i.imgur.com/mSCpAcu.png'
           },
           {
             title: 'Restauración',
             desc: 'Recuperación estética y funcional completa a estándares de fábrica.',
             icon: History,
-            img: '/ohlins.png'
+            img: 'https://i.imgur.com/gANISSy.jpg'
           },
         ].map((service, idx) => (
           <motion.div
@@ -476,19 +476,19 @@ const MapSection = () => (
 
 const LogoBar = () => {
   const logos = [
-    'elka.png',
-    'fastace.png',
-    'kayaba.png',
-    'marzocchi.png',
-    'ohlinslogo.png',
-    'sachs.png',
-    'showa.png',
-    'wp.png',
-    'yss.png',
+    'https://i.imgur.com/eKlT2jv.png',
+    'https://i.imgur.com/6y9RqI6.png',
+    'https://i.imgur.com/H2JQ3kU.png',
+    'https://i.imgur.com/vcSgjbF.png',
+    'https://i.imgur.com/ciqlLiU.png',
+    'https://i.imgur.com/Yl0mSWk.png',
+    'https://i.imgur.com/CSD5kLh.png',
+    'https://i.imgur.com/4nlNEAj.png',
+    'https://i.imgur.com/kgUZpRq.png',
   ];
 
   return (
-    <div className="w-full bg-zinc-900/50 border-y border-white/5 py-8 overflow-hidden flex items-center relative">
+    <div className="w-full bg-zinc-900/50 border-y py-8 overflow-hidden flex items-center relative">
       {/* Gradient masks for smooth edges */}
       <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background-light to-transparent z-10"></div>
       <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-background-light to-transparent z-10"></div>
@@ -499,24 +499,21 @@ const LogoBar = () => {
           x: ["0%", "-50%"],
         }}
         transition={{
-          duration: 30,
+          duration: 25,
           repeat: Infinity,
           ease: "linear",
         }}
       >
         {/* Render logos twice for seamless loop */}
         {[...logos, ...logos].map((logo, idx) => (
-          <div key={idx} className="relative group/logo flex items-center justify-center px-8 md:px-12">
-            {/* Background Glow */}
-            <div className="absolute inset-0 bg-primary/5 blur-xl rounded-full opacity-0 group-hover/logo:opacity-100 transition-opacity duration-500"></div>
-            
-            <img
-              src={`/${logo}`}
-              alt={`Marca ${logo.split('.')[0]}`}
-              className={`${
-                logo === 'showa.png' ? 'h-6 md:h-7' : 'h-8 md:h-10'
-              } w-auto object-contain grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer relative z-10`}
+          <div key={idx} className="relative group/logo flex items-center justify-center px-6 md:px-10 h-16 md:h-20 shrink-0">
+            <img 
+              src={logo} 
+              alt="Partner"
+              className="h-10 md:h-12 lg:h-14 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300 mx-auto max-h-16 rounded-full"
+              loading="lazy"
               referrerPolicy="no-referrer"
+              draggable="false"
             />
           </div>
         ))}
