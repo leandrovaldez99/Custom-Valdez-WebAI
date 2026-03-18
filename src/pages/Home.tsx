@@ -488,11 +488,11 @@ const LogoBar = () => {
   ];
 
   return (
-    <div className="w-full bg-zinc-900/50 border-y py-8 overflow-hidden flex items-center relative">
+    <div className="w-full bg-zinc-900/50 py-8 overflow-hidden flex items-center relative">
       {/* Gradient masks for smooth edges */}
       <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background-light to-transparent z-10"></div>
       <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-background-light to-transparent z-10"></div>
-      
+
       <motion.div
         className="flex items-center whitespace-nowrap"
         animate={{
@@ -507,10 +507,10 @@ const LogoBar = () => {
         {/* Render logos twice for seamless loop */}
         {[...logos, ...logos].map((logo, idx) => (
           <div key={idx} className="relative group/logo flex items-center justify-center px-6 md:px-10 h-16 md:h-20 shrink-0">
-            <img 
-              src={logo} 
+            <img
+              src={logo}
               alt="Partner"
-              className="h-10 md:h-12 lg:h-14 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300 mx-auto max-h-16 rounded-full"
+              className="h-10 md:h-12 lg:h-14 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300 mx-auto max-h-16"
               loading="lazy"
               referrerPolicy="no-referrer"
               draggable="false"
